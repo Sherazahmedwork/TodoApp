@@ -23,8 +23,8 @@
 		    				<input type="text" class="form-control form-control-sm" value="{{ $todo->author }}" name="author"  />
 		    			</div>
 		    			<div class="col-md-6 form-group">
-		    				<label>Due Date</label> {{ $todo->due_date }}
-		    				<input type="date" class="form-control form-control-sm"  value="{{ $todo->due_date }}" name="due_date"  />
+		    				<label>Due Date</label> 
+		    				<input type="date" class="form-control form-control-sm"  value="{{ $todo->due_date->format('Y-m-d') }}" name="due_date"  />
 		    			</div>
 		    			<div class="col-md-6 form-group">
 		    				<label>Status</label>
@@ -43,6 +43,11 @@
 
 		    				@foreach ($todo->items as $item)
 		    					<div class="input-group mb-1 item">
+		    						<div class="input-group-prepend">
+									    <div class="input-group-text">
+									      <input type="checkbox" aria-label="">
+									    </div>
+									</div>
 								 	<input type="text" name="items[]" class="form-control form-control-sm" value="{{ $item->title }}">
 								 	<div class="input-group-append">
 								    	<button class="btn btn-outline-secondary btn-sm deleteItem--btn" type="button" >Delete</button>
@@ -51,16 +56,22 @@
 		    				@endforeach
 
 		    				<div class="input-group mb-1 item">
-							  <input type="text" name="items[]" class="form-control form-control-sm" placeholder="New Item" >
-							  <div class="input-group-append">
-							    <button class="btn btn-outline-secondary btn-sm deleteItem--btn" type="button" >Delete</button>
-							  </div>
+		    					<div class="input-group-prepend">
+								    <div class="input-group-text">
+								      <input type="checkbox" aria-label="">
+								    </div>
+								</div>
+							 	<input type="text" name="items[]" class="form-control form-control-sm" placeholder="New Item" >
+							  	<div class="input-group-append">
+							    	<button class="btn btn-outline-secondary btn-sm deleteItem--btn" type="button" >Delete</button>
+							  	</div>
 							</div>	
 
 		    			</div>
 
 		    			<div class="col-12">
 		    				<button class="btn btn-outline-success btn-sm addItem--btn"  type="button">Add Item</button>
+		    				<button class="btn btn-outline-danger btn-sm removeSelected--btn"  type="button" style="display: none;">Remove Selected</button>
 		    			</div>
 
 		    		</div>

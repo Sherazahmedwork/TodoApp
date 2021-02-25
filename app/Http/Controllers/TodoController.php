@@ -38,7 +38,8 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $validator = \Validator::make($request->all(),[
-            'name' => 'required'
+            'name' => 'required',
+            'priority' => 'required|numeric'
         ]);
 
         if ($validator->fails())
@@ -96,7 +97,8 @@ class TodoController extends Controller
     public function update(Request $request, $id)
     {
         $validator = \Validator::make($request->all(),[
-            'name' => 'required'
+            'name' => 'required',
+            'priority' => 'required|numeric'
         ]);
 
         if ($validator->fails())
@@ -136,7 +138,49 @@ class TodoController extends Controller
         $todo->items()->delete();
         $todo->delete();
         return response()->json([
-            'message' => 'Todo deleted'
+            'message' => 'Todo deleted successfully'
+        ]);
+    }
+
+    /**
+     * [bulkDestroy description]
+     * @param  Request $request [description]
+     * @return json           [description]
+     */     
+    public function bulkDestroy(Request $request)
+    {
+        Item::whereIn('todo_id',$request->ids)->delete();
+        Todo::whereIn('id',$request->ids)->delete();
+        return response()->json(['message' => 'Todo deleted successfully']);
+    }
+
+    /**
+     * [bulkEdit description]
+     * @param  Request $request [description]
+     * @return blade view           [description]
+     */
+    public function bulkEdit(Request $request)
+    {
+       $todos = Todo::find($request->ids);
+       return view('todo.edit-bulk',compact('todos'));
+    }
+
+    /**
+     * [bulkUpdate description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function bulkUpdate(Request $request)
+    {
+        foreach ($request->status as $todo_id => $value) {
+            Todo::where('id',$todo_id)->update(['status' => $value]);
+        }
+        foreach ($request->priority as $todo_id => $value) {
+            Todo::where('id',$todo_id)->update(['priority' => $value]);
+        }
+        return response()->json([
+            'message' => 'Todo updated successfully',
+            'url'    => route('todo.index')
         ]);
     }
 }

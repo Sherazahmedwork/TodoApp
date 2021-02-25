@@ -22,15 +22,15 @@
 		    			</div>
 		    			<div class="col-md-6 form-group">
 		    				<label>Due Date</label>
-		    				<input type="date" class="form-control form-control-sm" name="due_date"  />
+		    				<input type="date" class="form-control form-control-sm" name="due_date" value="{{ date('Y-m-d') }}" />
 		    			</div>
 		    			<div class="col-md-6 form-group">
 		    				<label>Status</label>
-		    				<input type="text" class="form-control form-control-sm" name="status"  />
+		    				<input type="text" class="form-control form-control-sm" name="status"   />
 		    			</div>
 		    			<div class="col-md-6 form-group">
 		    				<label>Priority</label>
-		    				<input type="number" min="1" class="form-control form-control-sm" name="priority"  />
+		    				<input type="number" min="1" class="form-control form-control-sm" name="priority" value="1"  />
 		    			</div>
 
 		    			<div class="col-12 form-group ">
@@ -39,15 +39,21 @@
 
 		    			<div class="col-12 itemsContainer">
 		    				<div class="input-group mb-1 item">
-							  <input type="text" name="items[]" class="form-control form-control-sm" placeholder="Item name" >
-							  <div class="input-group-append">
-							    <button class="btn btn-outline-secondary btn-sm deleteItem--btn" type="button" >Delete</button>
-							  </div>
+		    					<div class="input-group-prepend">
+								    <div class="input-group-text">
+								      <input type="checkbox" aria-label="">
+								    </div>
+								</div>
+							 	<input type="text" name="items[]" class="form-control form-control-sm" placeholder="Item name" >
+							  	<div class="input-group-append">
+							    	<button class="btn btn-outline-secondary btn-sm deleteItem--btn" type="button" >Delete</button>
+							  	</div>
 							</div>				
 		    			</div>
 
 		    			<div class="col-12">
 		    				<button class="btn btn-outline-success btn-sm addItem--btn"  type="button">Add Item</button>
+		    				<button class="btn btn-outline-danger btn-sm removeSelected--btn"  type="button" style="display: none;">Remove Selected</button>
 		    			</div>
 
 		    		</div>

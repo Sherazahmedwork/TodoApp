@@ -14,3 +14,6 @@ use App\Http\Controllers\TodoController;
 */
 Route::get('/',[TodoController::class,'index']);
 Route::resource('/todo',TodoController::class);
+Route::post('todo/destory/bulk',[TodoController::class,'bulkDestroy'])->name('todo.destroy.bulk');
+Route::post('todo/edit/bulk',[TodoController::class,'bulkEdit'])->name('todo.edit.bulk');
+Route::put('todo/edit/bulk',[TodoController::class,'bulkUpdate'])->name('todo.edit.bulk.submit');

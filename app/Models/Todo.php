@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -17,8 +18,11 @@ class Todo extends Model
    		return $this->hasMany(Item::class);
    	}
 
-   	// protected $casts = [
-   	// 	'due_date' => 'date:Y-m-d'
-   	// ];
+
+
+    protected $dates = ['due_date'];
+   	protected $casts = [
+   		'due_date' => 'date:Y-m-d'
+   	];
 
 }
